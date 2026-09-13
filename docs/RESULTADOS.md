@@ -27,7 +27,7 @@ scripts; los CSV completos están en `results/` en este repositorio (y en
 | paddleocr | No | 0.0061 | 0.0198 | 0.990 |
 | paddleocr | Sí | 0.0040 | 0.0379 | 0.974 |
 
-![Experimento 1](../outputs/figures/exp1_preprocessing.png)
+![Experimento 1](figures/exp1_preprocessing.png)
 
 **Interpretación.** El preprocesamiento reduce drásticamente el error de
 EasyOCR (CER −83%, de 0.095 a 0.016; WER −76%). En PaddleOCR el efecto es
@@ -51,7 +51,7 @@ PaddleOCR.
 | easyocr | 0.0161 | 0.0286 | 5.90 s | 0.915 |
 | **paddleocr** | **0.0040** | 0.0379 | **0.29 s** | **0.974** |
 
-![Experimento 2](../outputs/figures/exp2_engines.png)
+![Experimento 2](figures/exp2_engines.png)
 
 **Interpretación.** PaddleOCR obtiene un CER 4 veces menor que EasyOCR y
 es aproximadamente **20 veces más rápido** por imagen (0.29 s frente a
@@ -59,8 +59,9 @@ es aproximadamente **20 veces más rápido** por imagen (0.29 s frente a
 (0.029 vs 0.038), es decir, comete más errores a nivel de carácter pero
 esos errores tienden a no romper palabras completas tan a menudo. Con
 base en esta evidencia, **se ha fijado PaddleOCR como motor por defecto
-del sistema** (`config.py::OCRConfig.default_engine`), documentando
-aquí la justificación de esta decisión de diseño tomada a partir de los
+del sistema** (`config.py::OCRConfig.default_engine` en la extensión de
+aplicación completa; no incluida en este repositorio), documentando aquí
+la justificación de esta decisión de diseño tomada a partir de los
 propios datos del proyecto.
 
 ---
@@ -76,7 +77,7 @@ propios datos del proyecto.
 
 **Accuracy global: exacto 13.3% — fuzzy (≥80%) 13.3%** (idénticas)
 
-![Experimento 3](../outputs/figures/exp3_exact_vs_fuzzy.png)
+![Experimento 3](figures/exp3_exact_vs_fuzzy.png)
 
 **Interpretación — resultado inesperado y honesto.** El fuzzy matching
 NO mejora sobre el matching exacto en este experimento, algo contrario a
@@ -92,9 +93,10 @@ título real (score fuzzy medio ≈0.46, muy por debajo del umbral 0.80).
 El fuzzy matching solo puede rescatar errores de OCR *dentro* de un
 candidato correcto, no una selección de candidato equivocada. Esto
 **confirma cuantitativamente** la necesidad de la extracción basada en
-layout (tamaño de fuente vía bounding boxes) implementada en el sistema
-real (`src/ocr/field_extraction.py::extract_fields_from_lines`), en
-lugar de la heurística simplificada usada aquí para aislar la variable
+layout (tamaño de fuente vía bounding boxes), implementada tanto en la
+sección 3 del notebook de este repositorio como en la extensión de
+aplicación completa (`src/ocr/field_extraction.py::extract_fields_from_lines`),
+en lugar de la heurística simplificada usada aquí para aislar la variable
 de estudio.
 
 ---
@@ -113,7 +115,7 @@ de estudio.
 | Solo título | 34.7% | 34.7% |
 | Título + autor | **0.0%** | 34.0% |
 
-![Experimento 4](../outputs/figures/exp4_title_vs_title_author.png)
+![Experimento 4](figures/exp4_title_vs_title_author.png)
 
 **Interpretación — otro resultado honesto y contrario a la hipótesis
 inicial.** Con la extracción usada en este experimento (variante de
@@ -126,8 +128,9 @@ plano es poco fiable (a menudo una línea que no es realmente el autor),
 y promediarlo con el título (peso 0.3) arrastra el score combinado hacia
 abajo. Esto **no invalida** la estrategia de combinar título y autor en
 general — de hecho, una prueba manual end-to-end del pipeline real
-(`main.py`, que sí usa la extracción con bounding boxes) identificó
-correctamente "Cien años de soledad" de Gabriel García Márquez con un
+(`main.py` en la extensión de aplicación completa, que sí usa la
+extracción con bounding boxes) identificó correctamente "Cien años de
+soledad" de Gabriel García Márquez con un
 score de 0.90 combinando ambos campos correctamente extraídos. La
 lectura correcta de este experimento es: **el valor de combinar título y
 autor depende críticamente de la calidad de la extracción de campos**;
@@ -151,7 +154,7 @@ Motor: EasyOCR, con preprocesado (n=15 por condición).
 | Perspectiva | 0.0000 | 0.0000 | 0.916 |
 | Reflejo | 0.0198 | 0.0333 | 0.909 |
 
-![Experimento 5](../outputs/figures/exp5_image_quality.png)
+![Experimento 5](figures/exp5_image_quality.png)
 
 **Interpretación.** Las diferencias entre condiciones son pequeñas
 (CER entre 0.0% y 2.1%) y la condición "perspectiva" obtiene incluso

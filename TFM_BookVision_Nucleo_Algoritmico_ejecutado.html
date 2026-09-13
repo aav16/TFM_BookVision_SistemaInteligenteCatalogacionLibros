@@ -7796,7 +7796,7 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=17e7681f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=07fb9ff7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7831,7 +7831,7 @@ sección reproduce los 5 experimentos de evaluación con sus gráficas.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7acac859">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f1850232">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7852,15 +7852,14 @@ sección reproduce los 5 experimentos de evaluación con sus gráficas.</p>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.dpi"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
 
-<span class="c1"># Este notebook asume que se ejecuta con la carpeta "version_2_tfm" como</span>
-<span class="c1"># directorio de trabajo (ábrelo con Jupyter desde ahí). Si no, se intenta</span>
-<span class="c1"># localizar la carpeta automáticamente como red de seguridad.</span>
+<span class="c1"># Este notebook asume que se ejecuta con la raíz de este repositorio como</span>
+<span class="c1"># directorio de trabajo (ábrelo con Jupyter desde ahí).</span>
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"data/synthetic_samples"</span><span class="p">)</span>
 <span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"results"</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">DATA_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-    <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"version_2_tfm/data/synthetic_samples"</span><span class="p">)</span>
-    <span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"version_2_tfm/results"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">DATA_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">(),</span> <span class="s2">"No se encuentra data/synthetic_samples: ejecuta el notebook desde la carpeta version_2_tfm/"</span>
+<span class="k">assert</span> <span class="n">DATA_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">(),</span> <span class="p">(</span>
+    <span class="s2">"No se encuentra data/synthetic_samples: ejecuta Jupyter desde la raíz "</span>
+    <span class="s2">"de este repositorio, no desde una subcarpeta."</span>
+<span class="p">)</span>
 
 <span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">DATA_DIR</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.png"</span><span class="p">))</span>
 </pre></div>
@@ -7895,7 +7894,7 @@ sección reproduce los 5 experimentos de evaluación con sus gráficas.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fae55780">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9c38d24f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7915,7 +7914,7 @@ reales con derechos de autor.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=14a9dd33">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e49ce3e6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7932,7 +7931,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=42d22cac">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f7bdb5ea">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8057,7 +8056,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a4f6690e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3fc5297d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8104,7 +8103,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3517c25d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3fd89bb1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8123,7 +8122,7 @@ ejecuta el motor en vivo sobre una imagen real.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=db18f217">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e77f396e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8165,7 +8164,7 @@ Tiempo OCR:       0.200 s
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=18725df3">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9fe485a1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8214,7 +8213,7 @@ Tiempo OCR:       0.200 s
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>PaddleOCR real ejecutado en 0.70 s. Líneas detectadas:
+<pre>PaddleOCR real ejecutado en 0.72 s. Líneas detectadas:
   [0.99] Don Quijote de
   [0.91] la Mancha
   [1.00] Miguel de Cervantes
@@ -8224,7 +8223,7 @@ Tiempo OCR:       0.200 s
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=66d3fac9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f1351ad4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8242,7 +8241,7 @@ se dispone de las cajas del OCR, p. ej. al reanalizar texto ya guardado).</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=dd0f12fd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=44aa17ae">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8316,7 +8315,7 @@ ISBN detectado:                None
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7232387f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bd8a70c0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8330,7 +8329,7 @@ variante que realmente usa el sistema en producción:</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fbfecf66">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b031047c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8393,7 +8392,7 @@ Candidatos a autor:                      ['Miguel de Cervantes']
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8ba37797">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1ab05c8d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8412,7 +8411,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=181bf70c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c46df2fd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8470,7 +8469,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d983dcc1">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d84de4a0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8513,7 +8512,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dc89c3e8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1605b890">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8529,7 +8528,7 @@ el texto leído.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=015cad2f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2d93bc57">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8643,7 +8642,7 @@ el texto leído.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=43702fb1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87639dd5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8663,7 +8662,7 @@ lo devuelve textualmente).</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3d19056f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=09549631">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8866,7 +8865,7 @@ lo devuelve textualmente).</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6af0a09c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9e27332b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8916,7 +8915,7 @@ lo devuelve textualmente).</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0f39eade">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2c6b45ce">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8935,7 +8934,7 @@ no haber ISBN de referencia en el dataset sintético.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c44380d2">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5068c327">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9054,7 +9053,7 @@ score = 0.6·1.000 + 0.3·1.000 + 0.1·0 = 0.9  -&gt; identificado_automatico
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=201894e6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1b3733ef">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9069,7 +9068,7 @@ este notebook no dependa de instalar ambos motores OCR.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=83125607">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8e362235">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9079,7 +9078,7 @@ este notebook no dependa de instalar ambos motores OCR.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a5521664">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3f13b289">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9186,7 +9185,7 @@ este notebook no dependa de instalar ambos motores OCR.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=343695a0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=763f4f37">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9201,7 +9200,7 @@ PaddleOCR.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c7051232">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ac9f1cc6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9211,7 +9210,7 @@ PaddleOCR.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=df11af04">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b25c5d0e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9303,7 +9302,7 @@ PaddleOCR.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1d83b5dc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=60ef0306">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9317,7 +9316,7 @@ media. Por eso se fijó <strong>PaddleOCR como motor por defecto</strong> del si
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=febfa256">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=00eac3b4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9327,7 +9326,7 @@ media. Por eso se fijó <strong>PaddleOCR como motor por defecto</strong> del si
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=462f8e5f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9ae42585">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9438,7 +9437,7 @@ media. Por eso se fijó <strong>PaddleOCR como motor por defecto</strong> del si
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fa27cbc1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0508250a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9455,7 +9454,7 @@ posición/tamaño de letra (sección 3) que sí usa el sistema real.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8f7288fb">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=16d0c02a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9465,7 +9464,7 @@ posición/tamaño de letra (sección 3) que sí usa el sistema real.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e12f4032">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b5b62876">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9615,7 +9614,7 @@ posición/tamaño de letra (sección 3) que sí usa el sistema real.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5f104b39">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81e3cbcc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9634,7 +9633,7 @@ cuello de botella del sistema, más que el algoritmo de matching en sí.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=31c72ba1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=721f0378">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9644,7 +9643,7 @@ cuello de botella del sistema, más que el algoritmo de matching en sí.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=61677a99">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=85267912">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9752,7 +9751,7 @@ cuello de botella del sistema, más que el algoritmo de matching en sí.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e9fbe0bc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e9a276c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9773,7 +9772,7 @@ identificación automática — ver la sección 9 de este mismo notebook y
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=871e7a9f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e5cb4aea">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9793,7 +9792,7 @@ scores ya calculados por el mismo algoritmo que demuestra este notebook.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7fd880b9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d0bf97d7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9979,7 +9978,7 @@ scores ya calculados por el mismo algoritmo que demuestra este notebook.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a2b4557b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd8c53a3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -10002,7 +10001,7 @@ lo que ninguna de las dos cifras puntuales debe leerse como un valor exacto.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0c5e49ec">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=586f007d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

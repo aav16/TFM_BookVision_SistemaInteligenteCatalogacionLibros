@@ -53,7 +53,7 @@ pip install -r requirements.txt
 jupyter notebook TFM_BookVision_Nucleo_Algoritmico.ipynb
 ```
 
-Ejecútalo con esta carpeta (`version_2_tfm/`) como directorio de trabajo —
+Ejecuta Jupyter desde la raíz de este repositorio —
 el notebook carga las imágenes de `data/synthetic_samples/` y los resultados
 de `results/` con rutas relativas.
 
