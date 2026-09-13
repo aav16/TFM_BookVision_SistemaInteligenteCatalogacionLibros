@@ -1,0 +1,31 @@
+# === BookVision — Núcleo algorítmico (versión reducida para el TFM) ===
+# Instalación: pip install -r requirements.txt
+# Basado en el entorno completo del proyecto (ver ../TFM_BookVision/requirements.txt)
+
+# --- Procesamiento de imagen ---
+opencv-python-headless==4.10.0.84
+numpy==1.26.4
+Pillow==10.4.0
+
+# --- Embeddings visuales (CNN preentrenada, transfer learning) ---
+torch==2.4.1
+torchvision==0.19.1
+
+# --- Matching de texto ---
+rapidfuzz==3.10.1
+
+# --- Consulta de APIs de metadatos (celda opcional) ---
+requests==2.32.3
+
+# --- Ciencia de datos / notebook ---
+pandas==2.2.3
+matplotlib==3.9.2
+jupyter==1.1.1
+nbconvert==7.16.4
+
+# --- Opcional: solo si quieres ejecutar en vivo la celda de OCR real ---
+# Si no se instalan, el notebook usa automáticamente el texto OCR ya
+# calculado en results/ocr_raw_results.csv (secciones 2-3 siguen
+# funcionando igual).
+# paddlepaddle==2.6.2
+# paddleocr==2.9.1

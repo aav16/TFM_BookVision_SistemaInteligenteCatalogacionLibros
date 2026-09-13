@@ -1,0 +1,18 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Cachés de modelos (torch hub, etc.) si se llegan a generar aquí
+models_cache/
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
