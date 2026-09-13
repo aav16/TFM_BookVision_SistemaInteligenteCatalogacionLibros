@@ -5,13 +5,14 @@
 Trabajo de Fin de Máster — Máster Universitario en Ciencia de Datos (UCJC)
 **Autor:** Antonio Álvarez Velasco · **Director:** Anas Ahachad
 
-Este repositorio contiene el **núcleo algorítmico** del sistema BookVision
-—el sistema de identificación de libros a partir de una fotografía de su
-portada que constituye el TFM propiamente dicho—, condensado en un único
-notebook autocontenido y documentado en [`docs/`](docs/), sin la ingeniería
-de aplicación (interfaz web, base de datos, CLI) que se construyó
-adicionalmente sobre él como extensión (ver "Qué se ha dejado fuera" más
-abajo). Todo el contenido algorítmico relevante está en un único notebook.
+Este repositorio contiene el sistema BookVision —el sistema de identificación
+de libros a partir de una fotografía de su portada que constituye el TFM—,
+condensado en un único notebook autocontenido y documentado en
+[`docs/`](docs/). El objeto de estudio de este TFM es el algoritmo de
+identificación y su evaluación experimental, no una aplicación de usuario
+final; por eso el repositorio no incluye interfaz web, base de datos ni CLI
+(ver "Qué no incluye este repositorio (y por qué)" más abajo). Todo el
+contenido algorítmico relevante está en un único notebook.
 
 ## Qué revisar
 
@@ -40,9 +41,8 @@ orden, y ejecutado sobre imágenes y datos reales del proyecto:
 8. Los 5 experimentos de evaluación del proyecto (Fase 10), con sus gráficas
    e interpretación.
 9. Calibración empírica del umbral de decisión (0.90/0.70), ejecutada sobre
-   las 253 fotografías reales evaluadas con la extensión de aplicación
-   completa (no incluida en este repositorio, ver "Qué se ha dejado fuera"):
-   precisión, cobertura y recall para cada umbral candidato, con su gráfica.
+   253 fotografías reales: precisión, cobertura y recall para cada umbral
+   candidato, con su gráfica.
 
 (La sección "0", justo antes de la 1, presenta las imágenes de ejemplo.)
 
@@ -74,11 +74,10 @@ basta con reiniciar el kernel o ejecutar esa celda de nuevo.
   para las demos en vivo.
 - `results/*.csv` — resultados ya calculados de los 5 experimentos, del
   benchmark de OCR (300 ejecuciones sobre las 75 imágenes del dataset
-  completo) y de la calibración del umbral sobre 253 fotografías reales,
-  generados por `experiments/` en el proyecto completo. Se reutilizan aquí
-  para no depender de instalar ambos motores OCR, de volver a ejecutar ~16
-  minutos de benchmark, ni de disponer de las 253 fotografías (no
-  distribuidas por derechos de autor de las portadas).
+  completo) y de la calibración del umbral sobre 253 fotografías reales. Se
+  reutilizan aquí para no depender de instalar ambos motores OCR, de volver
+  a ejecutar ~16 minutos de benchmark, ni de disponer de las 253 fotografías
+  (no distribuidas por derechos de autor de las portadas).
 - `requirements.txt` — dependencias mínimas para este notebook.
 - `docs/` — documentación técnica y de resultados, con sus gráficas en
   `docs/figures/` (ver [docs/README.md](docs/README.md) para el índice
@@ -87,13 +86,12 @@ basta con reiniciar el kernel o ejecutar esa celda de nuevo.
   cada cambio, que el notebook se ejecuta de extremo a extremo sin errores.
 - `LICENSE` — licencia MIT.
 
-## Qué se ha dejado fuera (y por qué)
+## Qué no incluye este repositorio (y por qué)
 
-Todo lo que es ingeniería de aplicación, no algoritmia: interfaz Streamlit
-(`app/`), persistencia en SQLite (`src/database/db.py`), CLI (`main.py`),
-logging, la suite de 76 tests, y el generador del dataset sintético. Esa
-extensión de aplicación completa y funcional, junto con la memoria completa
-del proyecto (`docs/MEMORIA_TFM.md`), vive en un repositorio/carpeta
-independiente (`TFM_BookVision/`), no incluida aquí, por si el tribunal
-pide ver la aplicación en funcionamiento o profundizar en algún punto más
-allá de lo que documenta [`docs/`](docs/) en este mismo repositorio.
+El objeto de estudio de este TFM es el algoritmo de identificación de libros
+y su evaluación experimental, no su empaquetado como producto: por eso este
+repositorio no incluye interfaz de usuario, persistencia en base de datos ni
+línea de comandos. Como posible continuación futura del proyecto, cabría
+plantearse envolver este núcleo algorítmico en una aplicación completa, pero
+esa ingeniería de aplicación no formaba parte del objeto de estudio de este
+TFM y, por tanto, no se ha abordado aquí.

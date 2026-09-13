@@ -3,9 +3,9 @@
 > Este documento describe el **núcleo algorítmico** entregado como TFM en
 > este repositorio (el notebook `TFM_BookVision_Nucleo_Algoritmico.ipynb`).
 > No describe una aplicación de escritorio/web independiente: no hay
-> `app/`, `src/`, `main.py` ni base de datos en este repositorio. Ver la
-> última sección, [Extensión de aplicación completa](#extensión-de-aplicación-completa-no-incluida-en-este-repositorio),
-> para lo que existe más allá de este alcance.
+> `app/`, `src/`, `main.py` ni base de datos en este repositorio, por no
+> ser el objeto de estudio de este TFM (ver "Trabajo futuro" al final de
+> este documento).
 
 ## 1. Problema y alcance
 
@@ -23,9 +23,8 @@ portada.
 - Evaluación experimental cuantitativa del sistema, incluida una
   calibración empírica del umbral de decisión sobre fotografías reales.
 
-**Fuera de alcance de este repositorio** (existen en la extensión de
-aplicación completa, ver el final de este documento, o son líneas futuras
-— ver [LIMITACIONES.md](LIMITACIONES.md)): persistencia en base de datos,
+**Fuera de alcance de este repositorio** (líneas futuras — ver
+[LIMITACIONES.md](LIMITACIONES.md)): persistencia en base de datos,
 interfaz de usuario, corrección manual interactiva, reconocimiento en
 vídeo/tiempo real, reconocimiento de lomos de estantería completa,
 entrenamiento de un modelo propio de clasificación de portadas (se usa
@@ -148,10 +147,10 @@ necesidad de reentrenarla ni ajustarla (fine-tuning).
 | Metadatos | Google Books + Open Library | WorldCat, ISBNdb | Ambas gratuitas y sin necesidad de API key; se combinan para maximizar cobertura (sección 7 del notebook: Google Books primero, Open Library como respaldo si falla o no hay resultados) |
 | Entorno de ejecución | Jupyter Notebook | Script de línea de comandos, Google Colab | Combina código, explicación y resultados en un único documento autocontenido, legible por un tribunal sin necesidad de ejecutar nada |
 
-La base de datos SQLite y la interfaz Streamlit, presentes en la
-extensión de aplicación completa (ver el final de este documento), no
+Una eventual persistencia en base de datos y una interfaz de usuario no
 forman parte de esta tabla porque no son decisiones de diseño del núcleo
-algorítmico de este repositorio.
+algorítmico de este repositorio, al no ser objeto de estudio de este TFM
+(ver "Trabajo futuro").
 
 ## 5. Estructura del resultado por imagen
 
@@ -169,10 +168,10 @@ diccionario `candidato` en la sección 7), con los siguientes campos:
 | `score` | Puntuación combinada (§6) |
 | `estado` | automática / revisión manual / no identificado |
 
-Esta misma estructura, ampliada con una clave primaria y marcas
-temporales de auditoría, es la que la extensión de aplicación completa
-persiste en una base de datos SQLite (una tabla para el inventario y otra
-para el registro de cada análisis ejecutado).
+Una eventual extensión con persistencia podría ampliar esta misma
+estructura con una clave primaria y marcas temporales de auditoría para
+guardarla en una base de datos, pero esa persistencia no forma parte del
+objeto de estudio de este TFM.
 
 ## 6. Sistema de identificación (Fase 6 del anteproyecto)
 
@@ -230,17 +229,15 @@ notebook se ejecuta de extremo a extremo sin intervención manual con:
 jupyter nbconvert --execute --to notebook TFM_BookVision_Nucleo_Algoritmico.ipynb
 ```
 
-## Extensión de aplicación completa (no incluida en este repositorio)
+## Trabajo futuro
 
-Sobre este mismo núcleo algorítmico se construyó, como desarrollo
-adicional, una extensión de aplicación completa con: interfaz de línea de
-comandos, aplicación web (Streamlit), persistencia en base de datos
-(SQLite) con detección de duplicados entre sesiones, logging, una suite
-de 76 pruebas automatizadas (pytest) y un generador del dataset sintético
-completo (`src/utils/synthetic_dataset.py`). Esa extensión **no está
-incluida en este repositorio**: aquí solo se documentan, en este mismo
-fichero, los requisitos y decisiones de diseño del núcleo algorítmico
-entregado. Los scripts de evaluación de esa extensión
-(`experiments/*.py`) son los que generaron los resultados ya calculados
-que este repositorio reutiliza en `results/*.csv` — ver
+Este documento describe íntegramente el núcleo algorítmico que constituye
+el objeto de estudio de este TFM. Como posible continuación futura del
+proyecto, se plantea la posibilidad de envolver este núcleo algorítmico en
+una aplicación completa (interfaz de usuario, persistencia de resultados
+en base de datos, línea de comandos), pero esa ingeniería de aplicación no
+formaba parte del objeto de estudio de este TFM y, por tanto, no se ha
+abordado en este trabajo. Los resultados ya calculados que este
+repositorio reutiliza en `results/*.csv` se generaron mediante scripts de
+evaluación durante el desarrollo del proyecto — ver
 [EXPERIMENTOS.md](EXPERIMENTOS.md).

@@ -18,9 +18,9 @@ reales de portadas comerciales.**
   capturan variabilidad tipográfica entre editoriales, ilustraciones
   complejas de fondo, texturas de papel, ni reflejos realistas de
   cámara de móvil.
-- **Plan de sustitución**: el sistema está preparado para recibir
-  fotografías reales sin cambios de código — basta con colocarlas en
-  `data/raw/` o subirlas por la interfaz Streamlit.
+- **Plan de sustitución**: el algoritmo está preparado para recibir
+  fotografías reales sin cambios de código — basta con apuntar el
+  notebook a un directorio con esas imágenes.
 - **Actualización — ya se completó esta validación**: se evaluó el
   pipeline con 253 fotografías reales aportadas por el autor (34 en una
   primera tanda, ampliadas después a 253). Resultados completos, con
@@ -42,10 +42,10 @@ empíricamente en el dataset de prueba, pero puede fallar en:
 
 Mitigación implementada: el sistema no exige una única interpretación
 correcta — genera varios candidatos y deja que el scoring contra las
-APIs externas (que sí tienen el título/autor reales) decida. La
-corrección manual interactiva cuando la confianza es baja está disponible
-en la interfaz de la extensión de aplicación completa (no incluida en
-este repositorio).
+APIs externas (que sí tienen el título/autor reales) decida. Una
+corrección manual interactiva cuando la confianza es baja se plantea
+como trabajo futuro (ver más abajo), al requerir una interfaz de
+usuario que no es objeto de estudio de este TFM.
 
 **Confirmado con fotos reales**: en la evaluación de 253 fotografías
 reales ([RESULTADOS_FOTOS_REALES.md](RESULTADOS_FOTOS_REALES.md)) se
@@ -83,9 +83,9 @@ degradación temporal de Google Books como fuente.
 
 **Confirmado a escala real**: al ampliar la validación de 34 a 253
 fotos evaluadas de forma consecutiva, el límite de Google Books se
-saturó de manera sostenida (avisos `429` casi continuos en
-`outputs/logs/bookvision.log`), y la proporción de fotos "no
-identificadas" subió del 76.5% al 89.3% — ver
+saturó de manera sostenida (avisos `429` casi continuos en el registro
+de ejecución), y la proporción de fotos "no identificadas" subió del
+76.5% al 89.3% — ver
 [RESULTADOS_FOTOS_REALES.md](RESULTADOS_FOTOS_REALES.md). Confirma con
 datos, no solo por anticipación teórica, que esta es la limitación de
 escalabilidad más relevante del sistema tal como está configurado hoy
@@ -99,29 +99,26 @@ CUDA/drivers, que romperían la reproducibilidad para cualquier persona
 que clone el repositorio.
 
 ### 5. Detección de duplicados visuales sensible al umbral
-El umbral de similitud visual (`config.MATCHING.visual_similarity_threshold
-= 0.92`) se fijó por inspección manual, no por una búsqueda experimental
+El umbral de similitud visual (0.92, definido en la sección 5 del
+notebook) se fijó por inspección manual, no por una búsqueda experimental
 exhaustiva (no se dispone de suficientes fotos repetidas del mismo libro
 físico en el dataset sintético para ese estudio). Con fotografías reales
 del mismo ejemplar en distintos ángulos, este umbral debería recalibrarse.
 
 **Fallo real detectado y corregido durante el desarrollo:** al probar el
-pipeline completo se observó un falso positivo — dos portadas sintéticas
-de libros distintos ("El Principito" y "Cien años de soledad"), que por
-azar compartían la misma paleta de color (`_PALETTES` en
-`synthetic_dataset.py`), obtuvieron una similitud de embedding visual de
-0.927 (por encima del umbral 0.92), marcándose incorrectamente como
-duplicados. Causa: un embedding de una CNN preentrenada en ImageNet
-captura sobre todo color/textura/composición global, no el contenido
-semántico exacto de la portada. **Corrección aplicada:** la sección 5 del
-notebook de este repositorio exige ahora que el título identificado por
-texto no contradiga claramente el título del supuesto duplicado antes de
-aceptar la coincidencia puramente visual (equivalente a
-`is_visual_duplicate_corroborated()` en la extensión de aplicación
-completa, con su prueba de regresión en `tests/test_book_identifier.py`
-ahí). Esto reduce el riesgo pero no lo elimina del todo si el OCR no
-obtiene texto útil de ninguna de las dos portadas — un caso extremo que
-solo la comprobación por ISBN podría resolver con certeza.
+pipeline se observó un falso positivo — dos portadas sintéticas de libros
+distintos ("El Principito" y "Cien años de soledad"), que por azar
+compartían la misma paleta de color del generador sintético, obtuvieron
+una similitud de embedding visual de 0.927 (por encima del umbral 0.92),
+marcándose incorrectamente como duplicados. Causa: un embedding de una
+CNN preentrenada en ImageNet captura sobre todo color/textura/composición
+global, no el contenido semántico exacto de la portada. **Corrección
+aplicada:** la sección 5 del notebook de este repositorio exige ahora que
+el título identificado por texto no contradiga claramente el título del
+supuesto duplicado antes de aceptar la coincidencia puramente visual.
+Esto reduce el riesgo pero no lo elimina del todo si el OCR no obtiene
+texto útil de ninguna de las dos portadas — un caso extremo que solo la
+comprobación por ISBN podría resolver con certeza.
 
 ## Trabajo futuro
 
@@ -138,5 +135,7 @@ solo la comprobación por ISBN podría resolver con certeza.
   texto ruidoso de portada, en lugar de heurísticas de layout.
 - Exportar el inventario a formatos estándar (BibTeX, MARC) para
   interoperar con sistemas bibliotecarios reales.
-- Desplegar la interfaz Streamlit en un servicio accesible remotamente
-  (requeriría credenciales de hosting — intervención del usuario).
+- Diseñar y desplegar una interfaz de usuario (p. ej. una aplicación web)
+  sobre este núcleo algorítmico, para facilitar su uso sin necesitar
+  ejecutar el notebook directamente — no abordado en este TFM por no ser
+  su objeto de estudio.

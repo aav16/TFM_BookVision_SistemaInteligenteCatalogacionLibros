@@ -1,20 +1,18 @@
 # Resultados de los experimentos
 
-> **Nota de alcance:** estos resultados se generaron con los scripts
-> `experiments/*.py` de la extensión de aplicación completa (no incluida
-> en este repositorio). Aquí se reutilizan ya calculados en `results/*.csv`
-> y se reproducen en la sección 8 del notebook.
+> **Nota de alcance:** estos resultados se generaron durante el
+> desarrollo del proyecto, según la metodología descrita en
+> [EXPERIMENTOS.md](EXPERIMENTOS.md). Aquí se reutilizan ya calculados
+> en `results/*.csv` y se reproducen en la sección 8 del notebook.
 
-Resultados obtenidos ejecutando `python -m experiments.run_ocr_benchmark`
-seguido de `python -m experiments.run_all` sobre el dataset sintético
-completo (75 imágenes: 15 títulos × 5 condiciones de captura — ver
+Resultados obtenidos sobre el dataset sintético completo (75 imágenes:
+15 títulos × 5 condiciones de captura — ver
 [LIMITACIONES.md](LIMITACIONES.md) sobre su carácter provisional).
 300 ejecuciones de OCR en total (75 imágenes × 2 motores × con/sin
 preprocesado), completadas en 942 s (~15,7 min) en CPU.
 
 Todas las cifras de esta página son las que produjeron realmente esos
-scripts; los CSV completos están en `results/` en este repositorio (y en
-`outputs/experiments/` / `outputs/figures/` en el proyecto completo).
+cálculos; los CSV completos están en `results/` en este repositorio.
 
 ---
 
@@ -58,11 +56,9 @@ es aproximadamente **20 veces más rápido** por imagen (0.29 s frente a
 5.90 s), con mayor confianza media. EasyOCR tiene ligeramente mejor WER
 (0.029 vs 0.038), es decir, comete más errores a nivel de carácter pero
 esos errores tienden a no romper palabras completas tan a menudo. Con
-base en esta evidencia, **se ha fijado PaddleOCR como motor por defecto
-del sistema** (`config.py::OCRConfig.default_engine` en la extensión de
-aplicación completa; no incluida en este repositorio), documentando aquí
-la justificación de esta decisión de diseño tomada a partir de los
-propios datos del proyecto.
+base en esta evidencia, **se ha fijado PaddleOCR como motor por defecto**
+en el resto del notebook, documentando aquí la justificación de esta
+decisión de diseño tomada a partir de los propios datos del proyecto.
 
 ---
 
@@ -84,8 +80,7 @@ NO mejora sobre el matching exacto en este experimento, algo contrario a
 la intuición inicial. La causa no es que el fuzzy matching sea inútil,
 sino el método de extracción usado deliberadamente en este experimento:
 el candidato de título es "el segmento de texto más largo" del OCR, sin
-usar información de posición/tamaño de fuente (ver nota de diseño en
-`experiments/exp3_exact_vs_fuzzy.py`). Cuando esa heurística simple
+usar información de posición/tamaño de fuente. Cuando esa heurística simple
 elige la línea equivocada (p. ej. el nombre del autor en vez del
 título), el resultado no es "un título con pequeños errores" —donde el
 fuzzy matching SÍ ayudaría— sino un texto completamente distinto al
@@ -93,11 +88,9 @@ título real (score fuzzy medio ≈0.46, muy por debajo del umbral 0.80).
 El fuzzy matching solo puede rescatar errores de OCR *dentro* de un
 candidato correcto, no una selección de candidato equivocada. Esto
 **confirma cuantitativamente** la necesidad de la extracción basada en
-layout (tamaño de fuente vía bounding boxes), implementada tanto en la
-sección 3 del notebook de este repositorio como en la extensión de
-aplicación completa (`src/ocr/field_extraction.py::extract_fields_from_lines`),
-en lugar de la heurística simplificada usada aquí para aislar la variable
-de estudio.
+layout (tamaño de fuente vía bounding boxes), implementada en la
+sección 3 del notebook (`extract_fields_from_lines`), en lugar de la
+heurística simplificada usada aquí para aislar la variable de estudio.
 
 ---
 
@@ -119,26 +112,24 @@ de estudio.
 
 **Interpretación — otro resultado honesto y contrario a la hipótesis
 inicial.** Con la extracción usada en este experimento (variante de
-texto plano de `extract_fields`, sin bounding boxes — ver nota de
-diseño en el script), añadir el autor al score lo EMPEORA en lugar de
-mejorarlo, y ninguna imagen alcanza el umbral automático (90%) con la
-estrategia combinada. La causa es la misma que en el Experimento 3: sin
-información de layout, el candidato de "autor" que se extrae del texto
-plano es poco fiable (a menudo una línea que no es realmente el autor),
-y promediarlo con el título (peso 0.3) arrastra el score combinado hacia
-abajo. Esto **no invalida** la estrategia de combinar título y autor en
-general — de hecho, una prueba manual end-to-end del pipeline real
-(`main.py` en la extensión de aplicación completa, que sí usa la
-extracción con bounding boxes) identificó correctamente "Cien años de
-soledad" de Gabriel García Márquez con un
-score de 0.90 combinando ambos campos correctamente extraídos. La
-lectura correcta de este experimento es: **el valor de combinar título y
-autor depende críticamente de la calidad de la extracción de campos**;
-combinarlos con una extracción poco fiable es peor que no combinarlos,
-mientras que con una extracción fiable (basada en layout, la que usa el
-sistema en producción) sí aporta valor. Esta es una limitación
-documentada explícitamente para trabajo futuro (mejorar/generalizar la
-extracción, ver [LIMITACIONES.md](LIMITACIONES.md)).
+texto plano de `extract_fields`, sin bounding boxes), añadir el autor
+al score lo EMPEORA en lugar de mejorarlo, y ninguna imagen alcanza el
+umbral automático (90%) con la estrategia combinada. La causa es la
+misma que en el Experimento 3: sin información de layout, el candidato
+de "autor" que se extrae del texto plano es poco fiable (a menudo una
+línea que no es realmente el autor), y promediarlo con el título (peso
+0.3) arrastra el score combinado hacia abajo. Esto **no invalida** la
+estrategia de combinar título y autor en general — de hecho, una
+prueba manual end-to-end del pipeline con extracción basada en
+bounding boxes (sección 3 del notebook) identificó correctamente
+"Cien años de soledad" de Gabriel García Márquez con un score de 0.90
+combinando ambos campos correctamente extraídos. La lectura correcta de
+este experimento es: **el valor de combinar título y autor depende
+críticamente de la calidad de la extracción de campos**; combinarlos
+con una extracción poco fiable es peor que no combinarlos, mientras que
+con una extracción fiable (basada en layout) sí aporta valor. Esta es
+una limitación documentada explícitamente para trabajo futuro
+(mejorar/generalizar la extracción, ver [LIMITACIONES.md](LIMITACIONES.md)).
 
 ---
 
@@ -184,8 +175,8 @@ sobre fotografías reales (ver [LIMITACIONES.md](LIMITACIONES.md) §1).
    es el cuello de botella real del sistema** — más determinante que la
    estrictez del matching (exacto vs fuzzy) o que combinar señales
    (título vs título+autor) — cuando esa extracción no usa información
-   de layout. Esto valida la decisión de diseño de usar bounding boxes
-   en el sistema de producción (`extract_fields_from_lines`) en lugar de
+   de layout. Esto valida la decisión de diseño de usar extracción
+   basada en bounding boxes (`extract_fields_from_lines`) en lugar de
    heurísticas de solo texto.
 4. El dataset sintético, aunque útil para validar el pipeline de extremo
    a extremo, es demasiado "limpio" para estresar realmente la

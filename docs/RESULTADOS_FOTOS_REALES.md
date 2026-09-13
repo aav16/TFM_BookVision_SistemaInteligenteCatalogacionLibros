@@ -1,12 +1,10 @@
 # Evaluación con fotografías reales
 
-> **Nota de alcance:** esta evaluación se ejecutó con los scripts
-> `experiments/evaluate_real_photos.py` y `experiments/analyze_real_photos.py`
-> de la extensión de aplicación completa (no incluida en este repositorio,
-> ver [DOCUMENTACION_TECNICA.md](DOCUMENTACION_TECNICA.md)), aplicando el
-> mismo algoritmo que demuestra el notebook de este repositorio. Las 253
-> fotografías no se distribuyen (derechos de autor de las portadas); solo
-> se documentan aquí las cifras agregadas.
+> **Nota de alcance:** esta evaluación se ejecutó aplicando el mismo
+> algoritmo que demuestra el notebook de este repositorio, sobre 253
+> fotografías reales tomadas por el autor. Las fotografías no se
+> distribuyen (derechos de autor de las portadas); solo se documentan
+> aquí las cifras agregadas.
 
 A diferencia de los 5 experimentos sobre el dataset sintético (ver
 [RESULTADOS.md](RESULTADOS.md)), esta evaluación usa **253 fotografías
@@ -23,15 +21,9 @@ manual de cada fotografía.
 > análisis cualitativo original (falso positivo de saga, hipótesis de
 > rotación) porque sigue siendo válido y se confirma con el lote mayor.
 
-Reproducir:
-```bash
-python -m experiments.evaluate_real_photos data/raw/fotos_reales
-```
-
-Resultados completos anotados en
-`outputs/experiments/real_photos_annotated.csv` (no se versiona en git
-por contener referencias a portadas con derechos de autor — ver
-`.gitignore`; solo se documentan aquí las cifras agregadas).
+Los resultados completos anotados por fotografía no se versionan en este
+repositorio por contener referencias a portadas con derechos de autor;
+solo se documentan aquí las cifras agregadas.
 
 ## Resultado global
 
@@ -111,10 +103,10 @@ La limitación ya prevista en
 [LIMITACIONES.md](LIMITACIONES.md) §3 ("en un uso intensivo podría
 notarse una degradación temporal de Google Books") se confirmó con
 datos al pasar de 34 a 253 fotos evaluadas de forma consecutiva: el
-registro de ejecución (`outputs/logs/bookvision.log`) muestra
-avisos `429 Too Many Requests` de forma prácticamente continua durante
-buena parte del proceso, con reintentos y backoff antes de caer a Open
-Library como respaldo. El efecto directo es que la proporción de fotos
+registro de ejecución mostró avisos `429 Too Many Requests` de forma
+prácticamente continua durante buena parte del proceso, con reintentos y
+backoff antes de caer a Open Library como respaldo. El efecto directo es
+que la proporción de fotos
 "no identificadas" subió del 76.5% (26/34) al 89.3% (226/253): no
 porque el sistema "lea" o "razone" peor con más fotos, sino porque la
 fuente de metadatos principal se satura con un volumen de consultas
@@ -138,8 +130,8 @@ superar el umbral del 90%.
 
 **Implicación práctica:** el sistema es vulnerable a confundir libros
 distintos de una misma serie/autor cuando el título extraído queda
-incompleto. Es un riesgo real de fiabilidad para un uso en producción
-sin supervisión, y se añade como limitación explícita (ver
+incompleto. Es un riesgo real de fiabilidad para un uso sin supervisión
+humana, y se añade como limitación explícita (ver
 [LIMITACIONES.md](LIMITACIONES.md)).
 
 **Segundo falso positivo, encontrado en el lote ampliado (patrón
@@ -188,27 +180,20 @@ patrón de fallo recurrente y bien identificado, no un caso aislado.
 
 ## Calibración empírica del umbral de decisión
 
-> **Nota de alcance:** `experiments/calibrate_threshold.py` y
-> `config.py::MatchingConfig` pertenecen a la extensión de aplicación
-> completa (no incluida en este repositorio). El resultado ya calculado se
+> **Nota de alcance:** el resultado ya calculado de esta calibración se
 > reutiliza en `results/threshold_calibration.csv` y se reproduce en la
 > sección 9 del notebook (`TFM_BookVision_Nucleo_Algoritmico.ipynb`).
 
 Los umbrales de decisión (0.90 automático, 0.70 revisión) se fijaron en el
 anteproyecto antes de disponer de datos reales, sin una búsqueda
 experimental de qué valor ofrece el mejor compromiso entre precisión y
-cobertura. `experiments/calibrate_threshold.py` cubre ese hueco: recorre
-un barrido de umbrales candidatos (0.70-0.95) sobre los 27 casos de
-`real_photos_annotated.csv` con verificación manual de corrección
-(`identificado_automatico` + `posible_coincidencia` — los 226
-"no_identificado" se excluyen a propósito por no tener esa verificación),
-calculando precisión, cobertura y recall para cada uno, y un intervalo de
-confianza binomial de Wilson (95%) para los umbrales relevantes.
-
-Reproducir (en la extensión completa, tras `analyze_real_photos.py`):
-```bash
-python -m experiments.calibrate_threshold
-```
+cobertura. Esta calibración cubre ese hueco: recorre un barrido de
+umbrales candidatos (0.70-0.95) sobre los 27 casos con verificación
+manual de corrección (identificación automática + posible coincidencia —
+los 226 "no identificado" se excluyen a propósito por no tener esa
+verificación), calculando precisión, cobertura y recall para cada uno, y
+un intervalo de confianza binomial de Wilson (95%) para los umbrales
+relevantes.
 
 Resultado (`results/threshold_calibration.csv` en este repositorio):
 

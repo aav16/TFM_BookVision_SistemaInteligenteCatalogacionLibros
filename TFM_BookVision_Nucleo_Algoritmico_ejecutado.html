@@ -7796,7 +7796,7 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=07fb9ff7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=494a9d00">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7804,14 +7804,11 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="BookVision-%E2%80%94-N%C3%BAcleo-algor%C3%ADtmico">BookVision — Núcleo algorítmico<a class="anchor-link" href="#BookVision-%E2%80%94-N%C3%BAcleo-algor%C3%ADtmico">¶</a></h1><p><strong>TFM: Sistema de Reconocimiento Automático de Libros mediante Visión Artificial y Aprendizaje Profundo</strong>
 Antonio Álvarez Velasco — Máster en Ciencia de Datos (UCJC) — dirigido por Anas Ahachad</p>
-<p>Este notebook es una <strong>versión reducida y autocontenida</strong> del proyecto completo
-(<code>TFM_BookVision/</code>), pensada para revisar de un vistazo la parte de ciencia de
-datos del trabajo: el algoritmo end-to-end y los experimentos que justifican
-sus decisiones de diseño. Deja fuera deliberadamente la ingeniería de
-aplicación que no aporta a la evaluación científica del TFM (interfaz
-Streamlit, base de datos SQLite, CLI, logging, suite de tests). Esa versión
-completa y ejecutable sigue disponible en <code>../TFM_BookVision/</code> por si el
-tribunal quiere verla funcionando como aplicación real.</p>
+<p>Este notebook contiene, de forma autocontenida, el algoritmo end-to-end y los
+experimentos que justifican sus decisiones de diseño: el objeto de estudio de
+este TFM. No incluye interfaz de usuario, persistencia en base de datos ni
+empaquetado como aplicación, por no ser el objeto de estudio de este trabajo
+(ver "Trabajo futuro" al final del notebook).</p>
 <h2 id="Qu%C3%A9-hace-el-sistema">Qué hace el sistema<a class="anchor-link" href="#Qu%C3%A9-hace-el-sistema">¶</a></h2><p>A partir de una fotografía de la portada de un libro:</p>
 <ol>
 <li><strong>Preprocesa</strong> la imagen (OpenCV): endereza, elimina ruido, mejora contraste.</li>
@@ -7826,12 +7823,12 @@ calcula una puntuación de confianza (<em>fuzzy matching</em>).</li>
 posible coincidencia (revisión manual) o no identificado.</li>
 </ol>
 <p>Cada sección de este notebook implementa y ejecuta en vivo una de estas
-etapas sobre imágenes reales del dataset sintético del proyecto, y la última
-sección reproduce los 5 experimentos de evaluación con sus gráficas.</p>
+etapas sobre imágenes reales del dataset de ejemplo, y la última sección
+reproduce los 5 experimentos de evaluación con sus gráficas.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f1850232">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2cd75f6c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7839,7 +7836,7 @@ sección reproduce los 5 experimentos de evaluación con sus gráficas.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -7849,7 +7846,7 @@ sección reproduce los 5 experimentos de evaluación con sus gráficas.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.dpi"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
 
 <span class="c1"># Este notebook asume que se ejecuta con la raíz de este repositorio como</span>
@@ -7894,27 +7891,27 @@ sección reproduce los 5 experimentos de evaluación con sus gráficas.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9c38d24f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9317f3f0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Datos-de-ejemplo">Datos de ejemplo<a class="anchor-link" href="#Datos-de-ejemplo">¶</a></h2><p>El dataset sintético completo (75 imágenes: 15 títulos × 5 condiciones de
-captura — frontal, rotada, poca luz, con reflejo, en perspectiva) vive en el
-proyecto completo (<code>TFM_BookVision/data/test/synthetic/</code>) y se genera con
-<code>src/utils/synthetic_dataset.py</code>. Aquí se incluye una muestra de <strong>3 títulos ×
-5 condiciones = 15 imágenes</strong> suficiente para demostrar cada etapa del
-algoritmo sin necesitar el repositorio completo. Los tres títulos son
-<em>Cien años de soledad</em> (Gabriel García Márquez), <em>Don Quijote de la Mancha</em>
-(Miguel de Cervantes) y <em>1984</em> (George Orwell) — libros reales usados solo
-como texto de referencia; las portadas son renders sintéticos, no imágenes
-reales con derechos de autor.</p>
+captura — frontal, rotada, poca luz, con reflejo, en perspectiva) se generó
+mediante un script de generación sintética (composición de texto renderizado
+con transformaciones geométricas y fotométricas controladas). Aquí se incluye
+una muestra de <strong>3 títulos × 5 condiciones = 15 imágenes</strong> suficiente para
+demostrar cada etapa del algoritmo sin necesitar el dataset completo. Los
+tres títulos son <em>Cien años de soledad</em> (Gabriel García Márquez), <em>Don
+Quijote de la Mancha</em> (Miguel de Cervantes) y <em>1984</em> (George Orwell) — libros
+reales usados solo como texto de referencia; las portadas son renders
+sintéticos, no imágenes reales con derechos de autor.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e49ce3e6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9597f2d0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7931,7 +7928,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f7bdb5ea">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=73123a2c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7939,7 +7936,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">max_dimension</span><span class="o">=</span><span class="mi">1600</span><span class="p">):</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">max_dimension</span><span class="o">=</span><span class="mi">1600</span><span class="p">):</span>
     <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="n">max_dimension</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">scale</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">:</span>
@@ -8056,7 +8053,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3fc5297d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a2160751">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8064,7 +8061,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">ejemplo_path</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">"01_rotada.png"</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ejemplo_path</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">"01_rotada.png"</span>
 <span class="n">imagen_original</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ejemplo_path</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
 <span class="n">imagen_preprocesada</span> <span class="o">=</span> <span class="n">preprocess_for_ocr</span><span class="p">(</span><span class="n">imagen_original</span><span class="p">)</span>
 
@@ -8103,7 +8100,7 @@ ayuda realmente cada motor OCR con este preprocesado.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3fd89bb1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ba0372b6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8122,7 +8119,7 @@ ejecuta el motor en vivo sobre una imagen real.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e77f396e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=dbadccaf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8130,7 +8127,7 @@ ejecuta el motor en vivo sobre una imagen real.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">ocr_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"ocr_raw_results.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ocr_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"ocr_raw_results.csv"</span><span class="p">)</span>
 
 <span class="n">ejemplo</span> <span class="o">=</span> <span class="n">ocr_raw</span><span class="p">[</span>
     <span class="p">(</span><span class="n">ocr_raw</span><span class="o">.</span><span class="n">book_index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ocr_raw</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s2">"rotada"</span><span class="p">)</span>
@@ -8164,7 +8161,7 @@ Tiempo OCR:       0.200 s
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9fe485a1">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1c5ab176">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8172,7 +8169,7 @@ Tiempo OCR:       0.200 s
 <div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># Celda OPCIONAL: ejecución en vivo de PaddleOCR sobre una imagen real.</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Celda OPCIONAL: ejecución en vivo de PaddleOCR sobre una imagen real.</span>
 <span class="c1"># Se ejecuta solo si el paquete está instalado; si no, se omite sin error</span>
 <span class="c1"># (el resto del notebook no depende de esta celda). Se guardan las líneas</span>
 <span class="c1"># CON su bounding box (posición de cada esquina) porque la sección 3 las</span>
@@ -8213,7 +8210,7 @@ Tiempo OCR:       0.200 s
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>PaddleOCR real ejecutado en 0.72 s. Líneas detectadas:
+<pre>PaddleOCR real ejecutado en 0.89 s. Líneas detectadas:
   [0.99] Don Quijote de
   [0.91] la Mancha
   [1.00] Miguel de Cervantes
@@ -8223,7 +8220,7 @@ Tiempo OCR:       0.200 s
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f1351ad4">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8c3f0cb4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8241,7 +8238,7 @@ se dispone de las cajas del OCR, p. ej. al reanalizar texto ya guardado).</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=44aa17ae">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7f7f1c73">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8249,7 +8246,7 @@ se dispone de las cajas del OCR, p. ej. al reanalizar texto ya guardado).</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">unicodedata</span>
 
 <span class="n">_PUNCT_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[^\w\s]"</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span>
@@ -8315,7 +8312,7 @@ ISBN detectado:                None
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bd8a70c0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7e2586c8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8325,11 +8322,11 @@ ISBN detectado:                None
 larga (en caracteres) que la del título, la heurística de "línea más larga"
 la elige por error como título. Esto es precisamente lo que motivó usar el
 <strong>tamaño de letra real</strong> (bounding box) en vez de la longitud del texto — la
-variante que realmente usa el sistema en producción:</p>
+variante que realmente usada en el resto del notebook:</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b031047c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9e4293ee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8337,7 +8334,7 @@ variante que realmente usa el sistema en producción:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_bbox_height</span><span class="p">(</span><span class="n">bbox</span><span class="p">):</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_bbox_height</span><span class="p">(</span><span class="n">bbox</span><span class="p">):</span>
     <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">bbox</span><span class="p">]</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
 
@@ -8369,9 +8366,7 @@ variante que realmente usa el sistema en producción:</p>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Título extraído (con layout, bbox real): </span><span class="si">{</span><span class="n">campos_layout</span><span class="p">[</span><span class="s1">'title_guess'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Candidatos a autor:                      </span><span class="si">{</span><span class="n">campos_layout</span><span class="p">[</span><span class="s1">'author_candidates'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Requiere la celda de OCR en vivo de la sección 2 (PaddleOCR no disponible aquí). "</span>
-          <span class="s2">"Código de referencia: src/ocr/field_extraction.py::extract_fields_from_lines "</span>
-          <span class="s2">"en el proyecto completo."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Requiere la celda de OCR en vivo de la sección 2 (PaddleOCR no disponible aquí)."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8392,7 +8387,7 @@ Candidatos a autor:                      ['Miguel de Cervantes']
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1ab05c8d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=88c6db49">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8411,7 +8406,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c46df2fd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cdd88f7d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8419,7 +8414,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">torchvision</span><span class="w"> </span><span class="kn">import</span> <span class="n">transforms</span>
@@ -8469,7 +8464,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d84de4a0">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5c51124c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8477,7 +8472,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="k">if</span> <span class="n">EMBEDDINGS_DISPONIBLE</span><span class="p">:</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">EMBEDDINGS_DISPONIBLE</span><span class="p">:</span>
     <span class="n">pares</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">"mismo libro, mismo encuadre</span><span class="se">\n</span><span class="s2">(00_frontal vs 00_perspectiva)"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"00_frontal.png"</span><span class="p">,</span> <span class="s2">"00_perspectiva.png"</span><span class="p">),</span>
         <span class="s2">"mismo libro, distinta luz</span><span class="se">\n</span><span class="s2">(00_frontal vs 00_poca_luz)"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"00_frontal.png"</span><span class="p">,</span> <span class="s2">"00_poca_luz.png"</span><span class="p">),</span>
@@ -8512,7 +8507,7 @@ color/textura/composición y ejecutable en CPU en tiempos razonables.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1605b890">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8bf36986">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8528,7 +8523,7 @@ el texto leído.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2d93bc57">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=739abfd9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8536,7 +8531,7 @@ el texto leído.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">rapidfuzz</span><span class="w"> </span><span class="kn">import</span> <span class="n">fuzz</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">fuzzy_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -8642,7 +8637,7 @@ el texto leído.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87639dd5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=faeb997c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8662,7 +8657,7 @@ lo devuelve textualmente).</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=09549631">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=483ac30e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8670,7 +8665,7 @@ lo devuelve textualmente).</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">WEIGHT_TITLE</span><span class="p">,</span> <span class="n">WEIGHT_AUTHOR</span><span class="p">,</span> <span class="n">WEIGHT_OTHER</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">WEIGHT_TITLE</span><span class="p">,</span> <span class="n">WEIGHT_AUTHOR</span><span class="p">,</span> <span class="n">WEIGHT_OTHER</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span>
 <span class="n">THRESHOLD_AUTO</span><span class="p">,</span> <span class="n">THRESHOLD_REVIEW</span> <span class="o">=</span> <span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.70</span>
 
 
@@ -8865,7 +8860,7 @@ lo devuelve textualmente).</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9e27332b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fa7827d3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8873,7 +8868,7 @@ lo devuelve textualmente).</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">tabla_resultados</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">tabla_resultados</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
     <span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">"#c44e52"</span><span class="p">,</span> <span class="s2">"#dd8452"</span><span class="p">,</span> <span class="s2">"#4c72b0"</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"nº de imágenes (de 15)"</span><span class="p">)</span>
@@ -8887,7 +8882,7 @@ lo devuelve textualmente).</p>
     <span class="s2">"sección 7 para un ejemplo con los tres términos activos). Los "</span>
     <span class="s2">"Experimentos 3 y 4 (sección 8) muestran cuantitativamente que la "</span>
     <span class="s2">"extracción sin layout es la parte más frágil del sistema, y motivan por "</span>
-    <span class="s2">"qué la versión de producción usa extract_fields_from_lines() con la "</span>
+    <span class="s2">"qué el resto del notebook usa extract_fields_from_lines() con la "</span>
     <span class="s2">"posición/tamaño real de cada línea del OCR."</span>
 <span class="p">)</span>
 </pre></div>
@@ -8908,14 +8903,14 @@ lo devuelve textualmente).</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Nota metodológica: esta demo usa extract_fields() (variante sin bounding boxes) para que la celda sea autocontenida, y el término ISBN del score es 0.0 porque el dataset sintético no lleva ISBN de referencia (ver sección 7 para un ejemplo con los tres términos activos). Los Experimentos 3 y 4 (sección 8) muestran cuantitativamente que la extracción sin layout es la parte más frágil del sistema, y motivan por qué la versión de producción usa extract_fields_from_lines() con la posición/tamaño real de cada línea del OCR.
+<pre>Nota metodológica: esta demo usa extract_fields() (variante sin bounding boxes) para que la celda sea autocontenida, y el término ISBN del score es 0.0 porque el dataset sintético no lleva ISBN de referencia (ver sección 7 para un ejemplo con los tres términos activos). Los Experimentos 3 y 4 (sección 8) muestran cuantitativamente que la extracción sin layout es la parte más frágil del sistema, y motivan por qué el resto del notebook usa extract_fields_from_lines() con la posición/tamaño real de cada línea del OCR.
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2c6b45ce">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d691733c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8934,7 +8929,7 @@ no haber ISBN de referencia en el dataset sintético.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5068c327">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ec905990">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8942,7 +8937,7 @@ no haber ISBN de referencia en el dataset sintético.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">buscar_google_books</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
@@ -9053,7 +9048,7 @@ score = 0.6·1.000 + 0.3·1.000 + 0.1·0 = 0.9  -&gt; identificado_automatico
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1b3733ef">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=52239f56">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9061,14 +9056,14 @@ score = 0.6·1.000 + 0.3·1.000 + 0.1·0 = 0.9  -&gt; identificado_automatico
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 <h2 id="8.-Resultados-experimentales-(Fase-10-del-anteproyecto)">8. Resultados experimentales (Fase 10 del anteproyecto)<a class="anchor-link" href="#8.-Resultados-experimentales-(Fase-10-del-anteproyecto)">¶</a></h2><p>Cinco experimentos sobre el dataset sintético completo (75 imágenes, 300
-ejecuciones de OCR), ya calculados por <code>experiments/</code> en el proyecto completo
-y guardados en <code>results/*.csv</code>. Se cargan aquí en vez de recalcularse para que
-este notebook no dependa de instalar ambos motores OCR.</p>
+ejecuciones de OCR), ya calculados y guardados en <code>results/*.csv</code>. Se cargan
+aquí en vez de recalcularse para que este notebook no dependa de instalar
+ambos motores OCR.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8e362235">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cf92cd29">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9078,7 +9073,7 @@ este notebook no dependa de instalar ambos motores OCR.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3f13b289">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6939f9e6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9086,7 +9081,7 @@ este notebook no dependa de instalar ambos motores OCR.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">exp1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp1_preprocessing_summary.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">exp1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp1_preprocessing_summary.csv"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exp1</span><span class="p">)</span>
 
 <span class="n">pivot</span> <span class="o">=</span> <span class="n">exp1</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"engine"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"preprocessing"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"cer_mean"</span><span class="p">)</span>
@@ -9185,7 +9180,7 @@ este notebook no dependa de instalar ambos motores OCR.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=763f4f37">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=04340c58">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9200,7 +9195,7 @@ PaddleOCR.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ac9f1cc6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=562f9204">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9210,7 +9205,7 @@ PaddleOCR.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b25c5d0e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e08ccd4c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9218,7 +9213,7 @@ PaddleOCR.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">exp2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp2_engines_summary.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">exp2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp2_engines_summary.csv"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exp2</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -9302,7 +9297,7 @@ PaddleOCR.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=60ef0306">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=05147d4c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9316,7 +9311,7 @@ media. Por eso se fijó <strong>PaddleOCR como motor por defecto</strong> del si
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=00eac3b4">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a8693a0f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9326,7 +9321,7 @@ media. Por eso se fijó <strong>PaddleOCR como motor por defecto</strong> del si
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9ae42585">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b3816718">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9334,7 +9329,7 @@ media. Por eso se fijó <strong>PaddleOCR como motor por defecto</strong> del si
 <div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">exp3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp3_matching_summary.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">exp3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp3_matching_summary.csv"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exp3</span><span class="p">)</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exp3</span><span class="p">))</span>
@@ -9437,7 +9432,7 @@ media. Por eso se fijó <strong>PaddleOCR como motor por defecto</strong> del si
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0508250a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3cec0afc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9454,7 +9449,7 @@ posición/tamaño de letra (sección 3) que sí usa el sistema real.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=16d0c02a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=97b7d022">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9464,7 +9459,7 @@ posición/tamaño de letra (sección 3) que sí usa el sistema real.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b5b62876">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6e397d1a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9472,7 +9467,7 @@ posición/tamaño de letra (sección 3) que sí usa el sistema real.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">exp4a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp4_title_vs_title_author_summary.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">exp4a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp4_title_vs_title_author_summary.csv"</span><span class="p">)</span>
 <span class="n">exp4b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp4_detection_rate.csv"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exp4a</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exp4b</span><span class="p">)</span>
@@ -9614,7 +9609,7 @@ posición/tamaño de letra (sección 3) que sí usa el sistema real.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81e3cbcc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d8487451">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9633,7 +9628,7 @@ cuello de botella del sistema, más que el algoritmo de matching en sí.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=721f0378">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=963f72b1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9643,7 +9638,7 @@ cuello de botella del sistema, más que el algoritmo de matching en sí.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=85267912">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=54d0f4bb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9651,7 +9646,7 @@ cuello de botella del sistema, más que el algoritmo de matching en sí.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">exp5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp5_image_quality_summary.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">exp5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"exp5_image_quality_summary.csv"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exp5</span><span class="p">)</span>
 
 <span class="n">exp5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"condition"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"cer_mean"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#4c72b0"</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -9751,7 +9746,7 @@ cuello de botella del sistema, más que el algoritmo de matching en sí.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e9a276c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1058630c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9764,15 +9759,15 @@ oscurecimiento, perspectiva) son moderadas y se aplican sobre texto
 renderizado de alto contraste, mucho más "limpio" que una fotografía real. El
 resultado a destacar es metodológico: la infraestructura de evaluación
 funciona correctamente en las 5 condiciones; medir la degradación real
-requiere fotografías reales (evaluadas aparte en el proyecto completo con 253
+requiere fotografías reales (evaluadas aparte con 253
 fotos: accuracy global 7.1%, pero 83.3% cuando el sistema declara
 identificación automática — ver la sección 9 de este mismo notebook y
-<code>docs/RESULTADOS_FOTOS_REALES.md</code> en el proyecto completo).</p>
+<code>docs/RESULTADOS_FOTOS_REALES.md</code>).</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e5cb4aea">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b52dca7f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9782,17 +9777,15 @@ identificación automática — ver la sección 9 de este mismo notebook y
 <h2 id="9.-Calibraci%C3%B3n-del-umbral-de-decisi%C3%B3n-(validaci%C3%B3n-con-fotograf%C3%ADas-reales)">9. Calibración del umbral de decisión (validación con fotografías reales)<a class="anchor-link" href="#9.-Calibraci%C3%B3n-del-umbral-de-decisi%C3%B3n-(validaci%C3%B3n-con-fotograf%C3%ADas-reales)">¶</a></h2><p>Los umbrales de decisión (0.90 automático, 0.70 revisión) se fijaron en el
 anteproyecto antes de disponer de datos reales, sin una búsqueda experimental
 de qué valor ofrece el mejor compromiso entre precisión y cobertura. Esta
-sección reproduce esa calibración empírica, ejecutada con
-<code>../TFM_BookVision/experiments/calibrate_threshold.py</code> sobre las 253
-fotografías reales evaluadas con el proyecto completo (ver
-<code>docs/RESULTADOS_FOTOS_REALES.md</code> ahí): de los 27 casos con identificación
-verificada manualmente, se recalcula qué precisión, cobertura y recall
-resultarían de mover el umbral entre 0.70 y 0.95, manteniendo fijos los
-scores ya calculados por el mismo algoritmo que demuestra este notebook.</p>
+sección reproduce esa calibración empírica sobre las 253 fotografías reales
+evaluadas (ver <code>docs/RESULTADOS_FOTOS_REALES.md</code>): de los 27 casos con
+identificación verificada manualmente, se recalcula qué precisión, cobertura
+y recall resultarían de mover el umbral entre 0.70 y 0.95, manteniendo fijos
+los scores ya calculados por el mismo algoritmo que demuestra este notebook.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d0bf97d7">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2694e9e7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9800,7 +9793,7 @@ scores ya calculados por el mismo algoritmo que demuestra este notebook.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">calib</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"threshold_calibration.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">calib</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"threshold_calibration.csv"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">calib</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -9978,7 +9971,7 @@ scores ya calculados por el mismo algoritmo que demuestra este notebook.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd8c53a3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c072e3f2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9991,7 +9984,7 @@ recall al 100% de los casos verificados, pero la precisión cae del 83.3% al
 incorrecto. Mantener 0.90 no es "subóptimo" sino una elección basada en el
 coste asimétrico de los dos tipos de error: un falso positivo automático
 (p. ej. confundir dos libros de la misma saga, ver
-<code>docs/RESULTADOS_FOTOS_REALES.md</code> en el proyecto completo) no tiene
+<code>docs/RESULTADOS_FOTOS_REALES.md</code>) no tiene
 supervisión humana, mientras que un falso negativo simplemente cae a
 revisión manual. Nota de tamaño muestral: con solo 12 y 15 casos verificados
 respectivamente, los intervalos de confianza (Wilson, 95%) para las
@@ -10001,7 +9994,7 @@ lo que ninguna de las dos cifras puntuales debe leerse como un valor exacto.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=586f007d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=26b3c67f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -10017,25 +10010,26 @@ marginal con PaddleOCR.</li>
 la extracción de campos (título/autor) es el cuello de botella real del
 sistema</strong> — más determinante que la estrictez del matching o que combinar
 señales — cuando esa extracción no usa información de layout. Esto valida
-la decisión de diseño de usar bounding boxes en producción.</li>
+la decisión de diseño de usar extracción basada en bounding boxes en
+lugar de heurísticas de solo texto.</li>
 <li>El dataset sintético, aunque útil para validar el pipeline de extremo a
 extremo, es demasiado "limpio" para estresar la robustez frente a
 condiciones de captura adversas; la evaluación con fotografías reales
-(sección 9 y proyecto completo) confirma que el cuello de botella final
-está en la fase de matching/APIs, no en el OCR.</li>
+(sección 9) confirma que el cuello de botella final está en la fase de
+matching/APIs, no en el OCR.</li>
 <li>La calibración del umbral (sección 9) muestra que 0.90 no maximiza F1
 (el óptimo está en 0.70), pero se mantiene por el coste asimétrico de un
 falso positivo automático frente a un falso negativo que cae a revisión
 manual — con intervalos de confianza amplios dado el tamaño muestral
 (12 y 15 casos).</li>
 </ol>
-<h2 id="D%C3%B3nde-est%C3%A1-el-resto">Dónde está el resto<a class="anchor-link" href="#D%C3%B3nde-est%C3%A1-el-resto">¶</a></h2><p>Este notebook cubre la parte algorítmica, incluida su calibración empírica
-sobre datos reales (sección 9). El proyecto completo, en
-<code>../TFM_BookVision/</code>, añade sobre esto: interfaz Streamlit, persistencia en
-SQLite, CLI (<code>main.py</code>), suite de 76 tests, generación del dataset sintético,
-evaluación con 253 fotografías reales, y toda la documentación de la memoria
-(<code>docs/MEMORIA_TFM.md</code>, <code>docs/DOCUMENTACION_TECNICA.md</code>,
-<code>docs/LIMITACIONES.md</code>, <code>docs/RESULTADOS_FOTOS_REALES.md</code>).</p>
+<h2 id="Trabajo-futuro">Trabajo futuro<a class="anchor-link" href="#Trabajo-futuro">¶</a></h2><p>Este notebook cubre íntegramente el objeto de estudio de este TFM: el
+algoritmo de identificación y su evaluación, incluida la calibración
+empírica sobre datos reales (sección 9). Como posible continuación futura de
+este trabajo, se plantea la posibilidad de envolver este núcleo algorítmico
+en una aplicación completa (interfaz de usuario y persistencia de
+resultados), pero esa ingeniería de aplicación no formaba parte del objeto
+de estudio de este TFM y, por tanto, no se ha abordado en este trabajo.</p>
 </div>
 </div>
 </div>

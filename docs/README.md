@@ -2,17 +2,10 @@
 
 Estos documentos describen la documentación técnica completa del sistema
 BookVision (arquitectura, decisiones de diseño, experimentos y resultados,
-limitaciones). Se han copiado aquí, sin modificar, desde el proyecto
-completo del TFM para acompañar al núcleo algorítmico de este repositorio.
-
-**Nota importante:** algunos de estos documentos referencian rutas de
-código (`src/`, `main.py`, `app/`, `tests/`, `experiments/`) que pertenecen
-a una extensión de aplicación completa (interfaz Streamlit, persistencia en
-base de datos, CLI, suite de pruebas) construida sobre este mismo núcleo
-algorítmico. Esa extensión **no forma parte de este repositorio**, que
-contiene únicamente el notebook autocontenido
+limitaciones), que acompañan al notebook autocontenido
 (`TFM_BookVision_Nucleo_Algoritmico.ipynb`) evaluado como TFM — ver el
-[README](../README.md) de la raíz para más detalle sobre este alcance.
+[README](../README.md) de la raíz para más detalle sobre el alcance de
+este repositorio.
 
 - [DOCUMENTACION_TECNICA.md](DOCUMENTACION_TECNICA.md) — arquitectura,
   requisitos, modelo de datos y justificación de decisiones tecnológicas.
