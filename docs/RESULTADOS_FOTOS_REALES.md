@@ -1,5 +1,13 @@
 # Evaluación con fotografías reales
 
+> **Nota de alcance:** esta evaluación se ejecutó con los scripts
+> `experiments/evaluate_real_photos.py` y `experiments/analyze_real_photos.py`
+> de la extensión de aplicación completa (no incluida en este repositorio,
+> ver [DOCUMENTACION_TECNICA.md](DOCUMENTACION_TECNICA.md)), aplicando el
+> mismo algoritmo que demuestra el notebook de este repositorio. Las 253
+> fotografías no se distribuyen (derechos de autor de las portadas); solo
+> se documentan aquí las cifras agregadas.
+
 A diferencia de los 5 experimentos sobre el dataset sintético (ver
 [RESULTADOS.md](RESULTADOS.md)), esta evaluación usa **253 fotografías
 reales** de portadas de libros físicos, aportadas por el autor del TFM
@@ -180,25 +188,31 @@ patrón de fallo recurrente y bien identificado, no un caso aislado.
 
 ## Calibración empírica del umbral de decisión
 
-Los umbrales de `MatchingConfig` (`threshold_auto=0.90`,
-`threshold_review=0.70`) se fijaron en el anteproyecto antes de disponer
-de datos reales, sin una búsqueda experimental de qué valor ofrece el
-mejor compromiso entre precisión y cobertura. `experiments/calibrate_threshold.py`
-cubre ese hueco: recorre un barrido de umbrales candidatos (0.70-0.95)
-sobre los 27 casos de `real_photos_annotated.csv` con verificación manual
-de corrección (`identificado_automatico` + `posible_coincidencia` — los
-226 "no_identificado" se excluyen a propósito por no tener esa
-verificación), calculando precisión, cobertura y recall para cada uno, y
-un intervalo de confianza binomial de Wilson (95%) para los umbrales
-relevantes.
+> **Nota de alcance:** `experiments/calibrate_threshold.py` y
+> `config.py::MatchingConfig` pertenecen a la extensión de aplicación
+> completa (no incluida en este repositorio). El resultado ya calculado se
+> reutiliza en `results/threshold_calibration.csv` y se reproduce en la
+> sección 9 del notebook (`TFM_BookVision_Nucleo_Algoritmico.ipynb`).
 
-Reproducir (tras `analyze_real_photos.py`):
+Los umbrales de decisión (0.90 automático, 0.70 revisión) se fijaron en el
+anteproyecto antes de disponer de datos reales, sin una búsqueda
+experimental de qué valor ofrece el mejor compromiso entre precisión y
+cobertura. `experiments/calibrate_threshold.py` cubre ese hueco: recorre
+un barrido de umbrales candidatos (0.70-0.95) sobre los 27 casos de
+`real_photos_annotated.csv` con verificación manual de corrección
+(`identificado_automatico` + `posible_coincidencia` — los 226
+"no_identificado" se excluyen a propósito por no tener esa verificación),
+calculando precisión, cobertura y recall para cada uno, y un intervalo de
+confianza binomial de Wilson (95%) para los umbrales relevantes.
+
+Reproducir (en la extensión completa, tras `analyze_real_photos.py`):
 ```bash
 python -m experiments.calibrate_threshold
 ```
 
-Resultado (`outputs/experiments/threshold_calibration.csv`,
-`outputs/figures/threshold_calibration.png`):
+Resultado (`results/threshold_calibration.csv` en este repositorio):
+
+![Calibración del umbral de decisión](figures/threshold_calibration.png)
 
 | Umbral | n cubiertos | Correctos | Precisión | Cobertura (/253) | Recall (/18) | F1 |
 |---|---|---|---|---|---|---|

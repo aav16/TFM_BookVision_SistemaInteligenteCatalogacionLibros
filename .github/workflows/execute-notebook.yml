@@ -1,0 +1,28 @@
+name: Ejecutar notebook de extremo a extremo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar el notebook de extremo a extremo
+        run: |
+          jupyter nbconvert --execute --to notebook \
+            --output /tmp/ejecutado.ipynb \
+            TFM_BookVision_Nucleo_Algoritmico.ipynb

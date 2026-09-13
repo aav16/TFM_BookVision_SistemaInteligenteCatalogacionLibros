@@ -31,18 +31,21 @@ reales de portadas comerciales.**
   [RESULTADOS_FOTOS_REALES.md](RESULTADOS_FOTOS_REALES.md).
 
 ### 2. Heurística de extracción título/autor basada en layout
-`src/ocr/field_extraction.py` asume que el título de una portada se
-imprime en el cuerpo de letra más grande. Es una heurística razonable y
-verificada empíricamente en el dataset de prueba, pero puede fallar en:
+La función `extract_fields_from_lines()` (sección 3 del notebook de este
+repositorio) asume que el título de una portada se imprime en el cuerpo
+de letra más grande. Es una heurística razonable y verificada
+empíricamente en el dataset de prueba, pero puede fallar en:
 - Portadas donde el autor tiene más protagonismo tipográfico que el título
   (frecuente en autores best-seller).
 - Portadas sin jerarquía clara de tamaños (todo el texto del mismo tamaño).
 - Portadas con texto decorativo/artístico que el OCR confunde con título.
 
 Mitigación implementada: el sistema no exige una única interpretación
-correcta — genera varios candidatos y dejas que el scoring contra las
-APIs externas (que sí tienen el título/autor reales) decida; además la
-interfaz permite corrección manual cuando la confianza es baja.
+correcta — genera varios candidatos y deja que el scoring contra las
+APIs externas (que sí tienen el título/autor reales) decida. La
+corrección manual interactiva cuando la confianza es baja está disponible
+en la interfaz de la extensión de aplicación completa (no incluida en
+este repositorio).
 
 **Confirmado con fotos reales**: en la evaluación de 253 fotografías
 reales ([RESULTADOS_FOTOS_REALES.md](RESULTADOS_FOTOS_REALES.md)) se
@@ -110,15 +113,15 @@ azar compartían la misma paleta de color (`_PALETTES` en
 0.927 (por encima del umbral 0.92), marcándose incorrectamente como
 duplicados. Causa: un embedding de una CNN preentrenada en ImageNet
 captura sobre todo color/textura/composición global, no el contenido
-semántico exacto de la portada. **Corrección aplicada:**
-`src/matching/book_identifier.py::is_visual_duplicate_corroborated`
-exige ahora que el título identificado por texto no contradiga
-claramente el título del supuesto duplicado antes de aceptar la
-coincidencia puramente visual (test de regresión en
-`tests/test_book_identifier.py`). Esto reduce el riesgo pero no lo
-elimina del todo si el OCR no obtiene texto útil de ninguna de las dos
-portadas — un caso extremo que solo la comprobación por ISBN podría
-resolver con certeza.
+semántico exacto de la portada. **Corrección aplicada:** la sección 5 del
+notebook de este repositorio exige ahora que el título identificado por
+texto no contradiga claramente el título del supuesto duplicado antes de
+aceptar la coincidencia puramente visual (equivalente a
+`is_visual_duplicate_corroborated()` en la extensión de aplicación
+completa, con su prueba de regresión en `tests/test_book_identifier.py`
+ahí). Esto reduce el riesgo pero no lo elimina del todo si el OCR no
+obtiene texto útil de ninguna de las dos portadas — un caso extremo que
+solo la comprobación por ISBN podría resolver con certeza.
 
 ## Trabajo futuro
 

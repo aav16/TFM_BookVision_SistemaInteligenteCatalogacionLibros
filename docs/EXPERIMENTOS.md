@@ -1,10 +1,20 @@
 # Experimentos (Fase 10)
 
+> **Nota de alcance:** los scripts `experiments/*.py` y `src/*` referenciados
+> en este documento (por ejemplo `experiments/run_ocr_benchmark.py`,
+> `src/ocr/field_extraction.py`, `config.MatchingConfig`) pertenecen a la
+> extensión de aplicación completa del proyecto y **no están incluidos en
+> este repositorio** (ver el final de
+> [DOCUMENTACION_TECNICA.md](DOCUMENTACION_TECNICA.md)). Este documento
+> describe cómo se generaron los resultados que este repositorio reutiliza
+> ya calculados en `results/*.csv`, cargados y graficados en la sección 8
+> del notebook (`TFM_BookVision_Nucleo_Algoritmico.ipynb`).
+
 Todos los experimentos usan el dataset sintético de prueba (75 imágenes:
 15 libros × 5 condiciones de captura — ver [LIMITACIONES.md](LIMITACIONES.md)
 sobre el carácter provisional de este dataset).
 
-Reproducir:
+Reproducir (en la extensión de aplicación completa, no en este repositorio):
 ```bash
 python -m experiments.run_ocr_benchmark   # una sola vez, genera el CSV base
 python -m experiments.run_all             # ejecuta y grafica los 5 experimentos
@@ -12,17 +22,18 @@ python -m experiments.run_all             # ejecuta y grafica los 5 experimentos
 
 El primer comando ejecuta el OCR sobre las 75 imágenes en las 4
 combinaciones (2 motores × con/sin preprocesado = 300 ejecuciones) y
-guarda todo en `outputs/experiments/ocr_raw_results.csv`. Los 5
-experimentos posteriores solo leen ese CSV, evitando repetir el trabajo
-más costoso (la inferencia OCR) para cada análisis.
+guarda todo en `outputs/experiments/ocr_raw_results.csv` (copiado a
+`results/ocr_raw_results.csv` en este repositorio). Los 5 experimentos
+posteriores solo leen ese CSV, evitando repetir el trabajo más costoso (la
+inferencia OCR) para cada análisis.
 
 ---
 
 ## Experimento 1 — Preprocesamiento OpenCV: con vs sin
 
-**Pregunta.** ¿El preprocesamiento (`src/image_processing/preprocessing.py`:
-deskew, CLAHE, denoise, autocrop) mejora realmente la calidad del OCR, o
-solo añade tiempo de cómputo?
+**Pregunta.** ¿El preprocesamiento (deskew, CLAHE, denoise, autocrop —
+implementado también en la sección 1 de este notebook) mejora realmente
+la calidad del OCR, o solo añade tiempo de cómputo?
 
 **Método.** Para cada imagen del dataset y cada motor OCR, se ejecuta el
 OCR dos veces: sobre la imagen original y sobre la imagen preprocesada.
@@ -78,13 +89,14 @@ global y por motor/preprocesado.
 identificación (Fase 6), frente a puntuar solo con el título?
 
 **Método.** Para cada resultado OCR, se extraen los campos de título y
-autor (`src/ocr/field_extraction.py`) y se calcula:
+autor (equivalente a `extract_fields()` en la sección 3 de este notebook)
+y se calcula:
 - `score_solo_titulo` = similitud(título_ocr, título_real)
 - `score_titulo_autor` = 0.6·similitud(título) + 0.3·similitud(autor)
 
-usando los pesos por defecto de `config.MatchingConfig`. Se mide qué
-fracción de casos alcanza cada umbral de decisión (automático ≥0.90,
-revisión ≥0.70) con cada estrategia.
+usando los pesos por defecto (`WEIGHT_TITLE`/`WEIGHT_AUTHOR` en la
+sección 6 del notebook). Se mide qué fracción de casos alcanza cada
+umbral de decisión (automático ≥0.90, revisión ≥0.70) con cada estrategia.
 
 **Nota de diseño.** Este experimento puntúa contra la ficha bibliográfica
 REAL conocida del dataset sintético (no contra resultados en vivo de las
@@ -106,9 +118,13 @@ para cada estrategia.
 la fotografía (frontal, rotada, poca luz, perspectiva distorsionada,
 reflejo)?
 
-**Método.** Se agrupan los resultados del motor/configuración de
-producción (EasyOCR + preprocesado) por condición de captura, calculando
-CER, WER y confianza media del OCR en cada una.
+**Método.** Se agrupan los resultados con EasyOCR y preprocesado activado
+por condición de captura, calculando CER, WER y confianza media del OCR
+en cada una. Nota de coherencia: este experimento se ejecutó con EasyOCR
+antes de adoptar PaddleOCR como motor por defecto (decisión que se toma
+precisamente a partir del Experimento 2); no se repitió después con
+PaddleOCR por no aportar información adicional a la pregunta de este
+experimento (el efecto relativo de la condición de captura).
 
 **Métrica.** CER/WER y confianza media por condición.
 

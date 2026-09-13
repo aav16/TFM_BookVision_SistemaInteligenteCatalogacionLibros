@@ -1,5 +1,10 @@
 # Resultados de los experimentos
 
+> **Nota de alcance:** estos resultados se generaron con los scripts
+> `experiments/*.py` de la extensión de aplicación completa (no incluida
+> en este repositorio). Aquí se reutilizan ya calculados en `results/*.csv`
+> y se reproducen en la sección 8 del notebook.
+
 Resultados obtenidos ejecutando `python -m experiments.run_ocr_benchmark`
 seguido de `python -m experiments.run_all` sobre el dataset sintético
 completo (75 imágenes: 15 títulos × 5 condiciones de captura — ver
@@ -7,9 +12,9 @@ completo (75 imágenes: 15 títulos × 5 condiciones de captura — ver
 300 ejecuciones de OCR en total (75 imágenes × 2 motores × con/sin
 preprocesado), completadas en 942 s (~15,7 min) en CPU.
 
-Todas las cifras de esta página son las que produjeron realmente los
-scripts en `experiments/`; los CSV completos están en
-`outputs/experiments/` y las figuras en `outputs/figures/`.
+Todas las cifras de esta página son las que produjeron realmente esos
+scripts; los CSV completos están en `results/` en este repositorio (y en
+`outputs/experiments/` / `outputs/figures/` en el proyecto completo).
 
 ---
 

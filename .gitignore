@@ -16,3 +16,10 @@ models_cache/
 Thumbs.db
 .vscode/
 .idea/
+
+# Por si acaso: nunca subir credenciales o datos generados aquí
+.env
+*.db
+*.sqlite
+*.sqlite3
+*.log
